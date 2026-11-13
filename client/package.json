@@ -12,7 +12,7 @@
     "lint": "eslint",
     "format": "npx prettier --write .",
     "preview": "vite preview",
-    "postinstall": "patch-package",
+    "postinstall": "node -e \"require('patch-package/index.js')\"",
     "test": "vitest --run",
     "test:watch": "vitest"
   },
