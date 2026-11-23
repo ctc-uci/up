@@ -22,9 +22,9 @@ CREATE TABLE programs (
   survey_synced_at timestamptz,
   calendar_synced_at timestamptz,
   created_by int,
-  created_at timestamptz DEFAULT now() NOT NULL,
-  FOREIGN KEY(created_at)
+    FOREIGN KEY(created_by)
     REFERENCES users(id)
     ON DELETE CASCADE,
+  created_at timestamptz DEFAULT now() NOT NULL,
   updated_at timestamptz DEFAULT now() NOT NULL
 );
