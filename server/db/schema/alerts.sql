@@ -9,11 +9,11 @@ CREATE TABLE alerts (
         CHECK (scope IN ('program', 'partner', 'system')),
     program_id int,
     FOREIGN KEY (program_id)
-        REFERENCES (programs.id)
+        REFERENCES programs(id)
         ON DELETE SET NULL,
     partner_id int,
     FOREIGN KEY (partner_id)
-        REFERENCES (partners.id)
+        REFERENCES partners(id)
         ON DELETE SET NULL,
     message text NOT NULL,
     dedupe_key varchar(200) NOT NULL UNIQUE,
@@ -21,6 +21,6 @@ CREATE TABLE alerts (
     resolved_at timestamptz,
     resolved_by int,
     FOREIGN KEY (resolved_by)
-        REFERENCES (users.id)
+        REFERENCES users(id)
         ON DELETE SET NULL,
 );
