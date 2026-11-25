@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS grants CASCADE;
+
+CREATE TABLE grants (
+  id VARCHAR(16) PRIMARY KEY,
+  sponsor VARCHAR(200) NOT NULL,
+  name VARCHAR(200) NOT NULL,
+  amount NUMERIC(12,2) NOT NULL DEFAULT 0.00,
+  status VARCHAR(32) NOT NULL,
+  start_date DATE,
+  end_date DATE,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+);
