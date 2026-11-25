@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS program_grants CASCADE;
-
 CREATE TABLE program_grants (
   program_id INTEGER REFERENCES programs(id) ON DELETE CASCADE,
   grant_id VARCHAR(16) REFERENCES grants(id) ON DELETE CASCADE,
