@@ -1,8 +1,6 @@
-DROP TABLE IF EXISTS survey_responses CASCADE;
-
 CREATE TABLE survey_responses (
   id SERIAL PRIMARY KEY,
-  progam_id INT REFERENCES programs(id),
+  program_id INT REFERENCES programs(id),
   phase VARCHAR(8) 
     CHECK (phase in ('pre', 'mid', 'post')),
   submitted_at TIMESTAMPTZ,
@@ -50,6 +48,27 @@ CREATE TABLE survey_responses (
 
   --Open-ended and follow-up (all phases)
   open_answers JSONB DEFAULT '{}'::jsonb,
-  wants_support BOOLEAN
+  wants_support BOOLEAN,
+
+  -- Phase-dependent constraints
+  CONSTRAINT gm_phase_check CHECK (
+    phase IN ('pre', 'post')
+    OR (
+        gm_talent IS NULL
+        AND gm_liking_subject IS NULL
+        AND gm_intelligence IS NULL
+        AND gm_effort IS NULL
+        AND gm_behavior IS NULL
+        AND gm_giving_up IS NULL
+    )
+  ),
+  CONSTRAINT pe_phase_check CHECK (
+    phase IN ('mid', 'post')
+    OR (
+        felt_accepted IS NULL 
+        AND more_confident IS NULL
+        AND gained_tools IS NULL
+    )
+  )
 );
 
